@@ -326,7 +326,7 @@ int main(void)
         sleepMicro(10000);
 #endif
     
-#ifdef ZOMBIE_MODE
+#if defined(ZOMBIE_MODE) || defined(QUAD_MODE)
         adc_result = acmpVccEstimate();
         //sleepMicro(20000);
 #endif
@@ -353,6 +353,8 @@ int main(void)
             n = sprintf(data_temp, "%d%cT%dV%d[%s]", NUM_REPEATS, data_count, int_temp, adc_result, NODE_ID);
 #elif defined(ZOMBIE_MODE)
             n = sprintf(data_temp, "%d%cT%dV%d[%s]", NUM_REPEATS, data_count, int_temp, adc_result, NODE_ID);
+#elif defined(QUAD_MODE)
+            n = sprintf(data_temp, "%d%cT%dR%dV%d[%s]", NUM_REPEATS, data_count, int_temp, rx_rssi, adc_result, NODE_ID);
 #else
             n = sprintf(data_temp, "%d%cT%dR%d[%s]", NUM_REPEATS, data_count, int_temp, rx_rssi, NODE_ID);
 #endif
